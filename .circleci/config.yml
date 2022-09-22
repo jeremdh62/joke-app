@@ -14,7 +14,8 @@ workflows:
                 - circle_ci_jerem
                 
       - node/test:
-          test-results-for: jest
+          requires:
+            - "node/run"
           filters:
             branches:
               only:
