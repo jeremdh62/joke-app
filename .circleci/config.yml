@@ -26,8 +26,9 @@ workflows:
     jobs:
       - heroku/deploy-via-git:
           requires:
-            - "node/run"
-            - "node/test"
+            - node/run
+            - node/test
+          app-name: "esgi-joke-app"
           filters:
             branches:
               only:
