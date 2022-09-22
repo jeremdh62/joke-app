@@ -5,6 +5,21 @@ orbs:
   heroku: circleci/heroku@1.2.6
   docker: circleci/docker@2.1.3
 
+jobs:
+  docker:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    steps:
+      - checkout
+      # with credentials stored in the UI
+      - run: |
+          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      # build the application image
+      - run: docker build -t $DOCKER_USER/test_joke_app_circleci .
+
+      # deploy the image
+      - run: docker push $DOCKER_USER/test_joke_app_circleci.
+
 workflows:
   build-test:
     jobs:
@@ -28,19 +43,6 @@ workflows:
             - "node/run"
             - "node/test"
           app-name: "esgi-joke-app"
-          filters:
-            branches:
-              only:
-                - circle_ci_jerem
-      
-      - docker/publish:
-          image: "jeremdh/app_joke:latest"
-          auth:
-            username: $DOCKER_USER
-            password: $DOCKER_PASS
-          requires:
-            - "node/run"
-            - "node/test"
           filters:
             branches:
               only:
