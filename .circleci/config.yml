@@ -35,8 +35,9 @@ workflows:
       
       - docker/publish:
           image: "jeremdh/app_joke:latest"
-          docker-username: $DOCKER_USER
-          docker-password: $DOCKER_PASS
+          auth:
+            username: $DOCKER_USER
+            password: $DOCKER_PASS
           requires:
             - "node/run"
             - "node/test"
