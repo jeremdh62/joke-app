@@ -31,4 +31,15 @@ workflows:
             branches:
               only:
                 - circle_ci_jerem
-                
+      
+      - docker/publish:
+          image: "$DOCKER_USER/app_joke:latest"
+          docker-username: $DOCKER_USER
+          docker-password: $DOCKER_PASS
+          requires:
+            - "node/run"
+            - "node/test"
+          filters:
+            branches:
+              only:
+                - circle_ci_jerem
