@@ -34,7 +34,7 @@ workflows:
                 - circle_ci_jerem
       
       - docker/publish:
-          image: "$DOCKER_USER/app_joke:latest"
+          image: "jeremdh/app_joke:latest"
           docker-username: $DOCKER_USER
           docker-password: $DOCKER_PASS
           requires:
