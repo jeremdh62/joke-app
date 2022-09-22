@@ -21,7 +21,7 @@ workflows:
             branches:
               only:
                 - circle_ci_jerem
-                
+
       - heroku/deploy-via-git:
           requires:
             - "node/run"
@@ -31,3 +31,4 @@ workflows:
             branches:
               only:
                 - circle_ci_jerem
+                
