@@ -2,18 +2,20 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.2
-      
+
 workflows:
   build-test:
     jobs:
       - node/run:
-        npm-run: build
-        filters:
-          branches:
-            only: circle_ci_jerem
-            
+          npm-run: build
+          filters:
+            branches:
+              only:
+                - circle_ci_jerem
+                
       - node/test:
-        test-results-run: jest
-        filters:
-          branches:
-            only: circle_ci_jerem
+          test-results-for: jest
+          filters:
+            branches:
+              only:
+                - circle_ci_jerem
