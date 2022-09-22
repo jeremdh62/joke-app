@@ -47,3 +47,8 @@ workflows:
             branches:
               only:
                 - circle_ci_jerem
+      - docker:
+          filters:
+            branches:
+              only:
+                - circle_ci_jerem
