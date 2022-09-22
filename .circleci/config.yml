@@ -1,12 +1,13 @@
 version: 2.1
 
 workflows:
-  build-test:
-    filters:
-      branches:
-        only:
-          - circle_ci_jerem
-jobs:
+  build:
+    jobs:
+      - build-test:
+          filters:
+            branches:
+              only:
+                - circle_ci_jerem
   build-test:
     docker:
       - image: cimg/node:16.17.0
