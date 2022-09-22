@@ -2,27 +2,18 @@ version: 2.1
 
 orbs:
   node: circleci/node@5.0.2
-
-jobs:
-  build-test:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - node/install:
-          node-version: "16.13.0"
-      - node/install-packages:
-          cache-path: ~/project/node_modules
-          override-ci-command: npm install
-      - run: npm run build
-      - run: npm test
       
 workflows:
-  build:
+  build-test:
     jobs:
-      - build-test:
-          filters:
-            branches:
-              only:
-                - circle_ci_jerem
-                
+      - node/run:
+        npm-run: build
+        filters:
+          branches:
+            only: circle_ci_jerem
+            
+      - node/test:
+        test-results-run: jest
+        filters:
+          branches:
+            only: circle_ci_jerem
